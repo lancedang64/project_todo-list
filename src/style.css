@@ -1,0 +1,64 @@
+/* @font-face {
+  font-family: 'myfont';
+  src: url('./fonts/myfont.woff') format('woff'),
+    url('./fonts/myfont.eot') format('eot'),
+    url('./fonts/myfont.svg') format('svg');
+  font-style: normal;
+}*/
+/* COPYRIGHT */
+html {
+  height: 100%;
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+}
+body {
+  min-height: 100%;
+  display: grid;
+  grid:
+    [row1-start] 'header header' 0.5fr [row1-end]
+    [row2-start] 'side-nav content' 10fr [row2-end]
+    / 1fr 3fr;
+}
+
+header {
+  grid-area: header;
+  background-color: #f4b942;
+  font-size: 1em;
+  padding-left: 2%;
+  border: solid 1px rgb(49, 49, 49);
+}
+
+.side-nav {
+  grid-area: side-nav;
+  background-color: #EBEBEB;
+  padding: 10% 15% 0 12%;
+  border-right: solid 1px rgb(49, 49, 49);
+  border-left: solid 1px rgb(49, 49, 49);
+  border-bottom: solid 1px rgb(49, 49, 49);
+}
+
+.side-nav a, .side-nav span {
+  display: block;
+  font-size: 2em;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 1em;
+}
+
+.content {
+  grid-area: content;
+  background-color: #F5F5F5;
+  padding: 5% 0 0 7%;
+  border-right: solid 1px rgb(49, 49, 49);
+  border-bottom: solid 1px rgb(49, 49, 49);
+}
+
+.content .item {
+  font-size: 1.5em;
+  width: 85%;
+  border: solid 1px black;
+  padding: 0.5em;
+  margin-bottom: 0.7em;
+  display: grid;
+  grid-template-columns: 6fr 1.5fr 0.5fr;
+  border-radius: 0 20px 0 20px;
+}

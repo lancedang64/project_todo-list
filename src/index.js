@@ -1,3 +1,3 @@
-import "./style.css";
+// import "./style.css";
 // uncomment for DIST !!!
 // comment for SRC !!!
