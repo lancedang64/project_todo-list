@@ -22,3 +22,6 @@ Hi, in this project I built a to do list
   
 - Problem Solving
   - Design and plan logic
+
+- Linux CLI
+  - Using alias to automate task
