@@ -103,6 +103,21 @@ header {
   font-size: 1em;
 }
 
+input[type="radio"] {
+  display: none;
+}
+
+.priority-label {
+  border: solid 1px black;
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+}
+
+input[type='radio']:checked + label {
+  background-color: #E79988;
+}
+
 .item-info {
   background-color: white;
   display: none;
