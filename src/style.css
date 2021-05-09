@@ -98,7 +98,8 @@ header {
 }
 
 .item-banner--editing input,
-.item-info--expanded input {
+.item-info--expanded input,
+.item-info--editing select {
   font-size: 1em;
 }
 
