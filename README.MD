@@ -17,7 +17,7 @@ Hi, in this project I built a to do list
 
 - CSS
   - Styling
-  - CSS Flex and positioning elements
+  - Flex, Grid and positioning elements
   - Keyframes animation
   
 - Problem Solving
