@@ -9,7 +9,11 @@ const coordinator = (() => {
     domController.renderNewItemPrompt();
   };
 
-  return { promptNewItem };
+  const showHideItemInfo = (e) => {
+    domController.showHideItemInfo(e);
+  };
+
+  return { promptNewItem, showHideItemInfo };
 })();
 
 export default coordinator;

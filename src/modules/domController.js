@@ -12,6 +12,14 @@ const domController = (() => {
     return itemDiv;
   };
 
+  const showHideItemInfo = (e) => {
+    const item = e.path[2];
+    const info = item.querySelector('.item-info');
+    info.classList.contains('item-info--expanded')
+      ? info.classList.remove('item-info--expanded')
+      : info.classList.add('item-info--expanded');
+  };
+
   const highlightPrompt = () => {
     const banner = document.querySelector('.item-banner--editing');
     const info = document.querySelector('.item-info--editing');
@@ -36,7 +44,7 @@ const domController = (() => {
     contentDiv.insertBefore(item, contentDiv.firstChild);
   };
 
-  return { getItem, renderNewItemPrompt, highlightPrompt };
+  return { getItem, showHideItemInfo, renderNewItemPrompt, highlightPrompt };
 })();
 
 export default domController;
