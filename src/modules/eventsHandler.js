@@ -16,7 +16,15 @@ const eventsHandler = (() => {
         showInfoButtons.forEach(button => button.addEventListener('click', coordinator.showHideItemInfo))
     };
 
-    return {addListenersOnPageLoad}
+    const addListenersNewItemPrompt = () => {
+        const discardButton = document.querySelector('.discard');
+        discardButton.addEventListener('click', coordinator.discardNewItemPrompt)
+
+        const saveNewButton = document.querySelector('.save-new-item');
+        saveNewButton.addEventListener('click', coordinator.saveNewItem)
+    }
+
+    return {addListenersOnPageLoad, addListenersNewItemPrompt}
 })();
 
 export default eventsHandler;

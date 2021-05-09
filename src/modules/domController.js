@@ -20,15 +20,21 @@ const domController = (() => {
       : info.classList.add('item-info--expanded');
   };
 
-  const highlightPrompt = () => {
+  const remindNewItemPrompt = () => {
     const banner = document.querySelector('.item-banner--editing');
     const info = document.querySelector('.item-info--editing');
-    banner.style.backgroundColor = '#23CE6B';
-    info.style.backgroundColor = '#23CE6B';
+    banner.style.backgroundColor = '#F8D48B';
+    info.style.backgroundColor = '#F8D48B';
     setTimeout(() => {
       banner.style.backgroundColor = 'white';
       info.style.backgroundColor = 'white';
     }, 200);
+  };
+
+  const remindNewItemInput = () => {
+    const banner = document.querySelector('.item-banner--editing');
+    banner.style.backgroundColor = '#E79988';
+    setTimeout(() => (banner.style.backgroundColor = 'white'), 200);
   };
 
   const renderNewItemPrompt = () => {
@@ -44,7 +50,19 @@ const domController = (() => {
     contentDiv.insertBefore(item, contentDiv.firstChild);
   };
 
-  return { getItem, showHideItemInfo, renderNewItemPrompt, highlightPrompt };
+  const discardNewItemPrompt = (e) => {
+    const item = e.path[3];
+    item.remove();
+  };
+
+  return {
+    getItem,
+    showHideItemInfo,
+    renderNewItemPrompt,
+    remindNewItemPrompt,
+    remindNewItemInput,
+    discardNewItemPrompt,
+  };
 })();
 
 export default domController;

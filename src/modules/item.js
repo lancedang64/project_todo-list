@@ -1,8 +1,8 @@
-const itemFactory = (name, description, dueDate, priority) => {
+const itemFactory = (name, description, dueDate, project, priority) => {
   let isDone = false;
-  //let id = uniqueIDGenerator;
+  //let id = uniqueIDGenerator; maybe dont need
 
-  return { name, desc: description, dueDate, priority };
+  return {};
 };
 
 export default itemFactory;
