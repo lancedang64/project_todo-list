@@ -51,11 +51,15 @@
         <div class="item-info item-info--expanded">
           <label>Description: </label>
           <span>Do at least 1 Leetcode question</span>
-          <br>
+          <span>Project: </span>
+          <span>Coding</span>
           <label>Priority: </label>
-          <span>!</span><br>
-          <button>Edit</button>
-          <button>Delete</button>
+          <span>!</span>
+          <br>
+          <div>
+            <button>Edit</button>
+            <button>Delete</button>
+          </div>
         </div>
       </div>
     </div>
@@ -68,20 +72,22 @@
       <div class="item-info item-info--editing item-info--expanded">
         <label>Description: </label>
         <input type="text">
-        <br>
         <span>Priority: </span>
-        <input type="radio" id="priority!" name="priority" value="!" checked="yes">
-        <label for="priority!">!</label>
-        <input type="radio" id="priority!!" name="priority" value="!!">
-        <label for="priority!!">!!</label>
-        <input type="radio" id="priority!!!" name="priority" value="!!!">
-        <label for="priority!!!">!!!</label>
-        <br>
+        <div>
+          <input type="radio" id="priority!" name="priority" value="!" checked="yes">
+          <label for="priority!">!</label>
+          <input type="radio" id="priority!!" name="priority" value="!!">
+          <label for="priority!!">!!</label>
+          <input type="radio" id="priority!!!" name="priority" value="!!!">
+          <label for="priority!!!">!!!</label>
+        </div>
         <label>Project: </label>
         <input type="text">
         <br>
-        <button>Discard</button>
-        <button>Save</button>
+        <div>
+          <button>Discard</button>
+          <button>Save</button>
+        </div>
       </div>
     </template>
     <script type="module" src="index.js"></script>
