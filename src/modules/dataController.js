@@ -3,7 +3,7 @@ import itemFactory from './item.js';
 const dataController = (() => {
   const allItems = [];
 
-  const getItem = (itemDiv) => {
+  const getItemFromInput = (itemDiv) => {
     const name = itemDiv.querySelector('.item-name--editing').value;
     const dueDate = itemDiv.querySelector('.item-date--editing').value;
     const description = itemDiv.querySelector('.item-description--editing')
@@ -17,11 +17,10 @@ const dataController = (() => {
   };
 
   const addToAllItems = (item) => {
-      allItems.push(item);
-      console.log(allItems);
+    allItems.push(item);
   };
 
-  return { getItem, addToAllItems };
+  return { getItemFromInput, addToAllItems };
 })();
 
 export default dataController;

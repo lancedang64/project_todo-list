@@ -22,7 +22,7 @@ const coordinator = (() => {
 
   const saveNewItem = (e) => {
     const itemDiv = e.path[3];
-    const item = dataController.getItem(itemDiv);
+    const item = dataController.getItemFromInput(itemDiv);
     if (!item) {
       domController.remindNewItemInput();
       return;
