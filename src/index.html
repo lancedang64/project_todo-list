@@ -74,6 +74,27 @@
         </div>
       </div>
     </template>
+    <template id="new-item-template">
+      <div class="item-banner">
+        <input type="checkbox" />
+        <span class='item-name'></span>
+        <span class='item-due-date'></span>
+        <button class="show-info">...</button>
+      </div>
+      <div class="item-info">
+        <label>Description: </label>
+        <span class="item-description"></span>
+        <span>Project: </span>
+        <span class="item-project"></span>
+        <label>Priority: </label>
+        <span class="item-priority"></span>
+        <br>
+        <div>
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </div>
+    </template>
     <script type="module" src="index.js"></script>
   </body>
 </html>

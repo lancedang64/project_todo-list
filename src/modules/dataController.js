@@ -13,7 +13,16 @@ const dataController = (() => {
       .value;
 
     if (name.trim() === '' || dueDate === '') return undefined;
-    return itemFactory(name, description, dueDate, project, priority);
+    
+    const formattedDueDate = getFormattedDate(dueDate);
+    return itemFactory(name, description, formattedDueDate, project, priority);
+  };
+
+  const getFormattedDate = (dueDate) => {
+    const arr = dueDate.split('-');
+    arr.reverse();
+    const newDate = arr.join('/');
+    return newDate;
   };
 
   const addToAllItems = (item) => {

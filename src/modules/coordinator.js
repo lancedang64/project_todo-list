@@ -29,7 +29,8 @@ const coordinator = (() => {
     }
     dataController.addToAllItems(item);
     domController.discardNewItemPrompt(e);
-    // domController render Item
+    console.log(item);
+    domController.renderNewItem(item);
     // localStorageController update
   };
 

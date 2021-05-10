@@ -1,15 +1,21 @@
 const domController = (() => {
-  const getItem = (item) => {
+  const renderNewItem = (item) => {
     const itemDiv = document.createElement('div');
-    itemDiv.setAttribute('class', 'item');
+    itemDiv.className = 'item';
+    //set item unique ID
 
-    itemDiv.innerHTML = `
-            <input type="checkbox">
-            <span> ${item.name} </span>
-            <span>Due ${item.dueDate}</span>
-            <button>...</button>`;
+    const itemTemplate = document.querySelector('#new-item-template');
+    let clone = itemTemplate.content.cloneNode(true);
+    itemDiv.appendChild(clone);
 
-    return itemDiv;
+    itemDiv.querySelector('.item-name').innerHTML = item.name;
+    itemDiv.querySelector('.item-due-date').innerHTML = 'Due ' + item.dueDate;
+    itemDiv.querySelector('.item-description').innerHTML = item.description;
+    itemDiv.querySelector('.item-project').innerHTML = item.project;
+    itemDiv.querySelector('.item-priority').innerHTML = item.priority;
+
+    const contentDiv = document.querySelector('.content');
+    contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
   };
 
   const showHideItemInfo = (e) => {
@@ -38,16 +44,16 @@ const domController = (() => {
   };
 
   const renderNewItemPrompt = () => {
-    const item = document.createElement('div');
-    item.className = 'item';
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'item';
     //set item unique ID
 
-    const itemTemplate = document.querySelector('#new-item-prompt-template');
-    let clone = itemTemplate.content.cloneNode(true);
-    item.appendChild(clone);
+    const itemPromptTemplate = document.querySelector('#new-item-prompt-template');
+    let clone = itemPromptTemplate.content.cloneNode(true);
+    itemDiv.appendChild(clone);
 
     const contentDiv = document.querySelector('.content');
-    contentDiv.insertBefore(item, contentDiv.firstChild);
+    contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
   };
 
   const discardNewItemPrompt = (e) => {
@@ -56,7 +62,7 @@ const domController = (() => {
   };
 
   return {
-    getItem,
+    renderNewItem,
     showHideItemInfo,
     renderNewItemPrompt,
     remindNewItemPrompt,
