@@ -22,6 +22,15 @@ const dataController = (() => {
     return itemFactory(name, description, formattedDueDate, project, priority);
   };
 
+  const updateAndGetItemFromDiv = (itemDiv) => {
+    const item = getItemFromDiv(itemDiv);
+    const itemIndex = allItems.indexOf(item);
+    const updatedItem = getItemFromInput(itemDiv);
+    if (!updatedItem) return undefined;
+    allItems[itemIndex] = updatedItem;
+    return updatedItem;
+  };
+
   const getFormattedDate = (dueDate) => {
     const arr = dueDate.split('-');
     arr.reverse();
@@ -40,10 +49,17 @@ const dataController = (() => {
 
   const getItemFromDiv = (itemDiv) => {
     const itemName = itemDiv.querySelector('.item-name').innerHTML;
-    return allItems.find(item => item.name === itemName);
+    return allItems.find((item) => item.name === itemName);
   };
 
-  return { getItemsFromTab, getItemFromInput, addToAllItems, deleteItem, getItemFromDiv };
+  return {
+    getItemsFromTab,
+    getItemFromInput,
+    addToAllItems,
+    deleteItem,
+    getItemFromDiv,
+    updateAndGetItemFromDiv
+  };
 })();
 
 export default dataController;

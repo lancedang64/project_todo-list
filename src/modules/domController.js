@@ -1,4 +1,6 @@
 const domController = (() => {
+  const contentDiv = document.querySelector('.content');
+
   const renderItemsFromATab = (itemsArr) => {
     itemsArr.forEach((item) => renderNewItem(item));
   };
@@ -7,7 +9,7 @@ const domController = (() => {
     toggleItemContentDisplay(itemDiv);
 
     const formattedDate = getReversedFormattedDate(item.dueDate);
-    itemDiv.appendChild(getItemPromptElements());
+    itemDiv.appendChild(getItemTemplateElements('new-item-prompt-template'));
     itemDiv.querySelector('.item-name--editing').value = item.name;
     itemDiv.querySelector('.item-due-date--editing').value = formattedDate;
     itemDiv.querySelector('.item-description--editing').value =
@@ -20,6 +22,11 @@ const domController = (() => {
     itemDiv.removeChild(itemDiv.querySelector('.item-banner--editing'));
     itemDiv.removeChild(itemDiv.querySelector('.item-info--editing'));
     toggleItemContentDisplay(itemDiv);
+  };
+
+  const updateItemFromDiv = (itemDiv, updatedItem) => {
+    discardItemEditMode(itemDiv);
+    updateItemDivWithItem(itemDiv, updatedItem);
   };
 
   const toggleItemContentDisplay = (itemDiv) => {
@@ -36,20 +43,20 @@ const domController = (() => {
   const renderNewItem = (item) => {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
-    //set item unique ID
 
-    const itemTemplate = document.querySelector('#new-item-template');
-    let clone = itemTemplate.content.cloneNode(true);
-    itemDiv.appendChild(clone);
+    itemDiv.appendChild(getItemTemplateElements('new-item-template'));
 
+    updateItemDivWithItem(itemDiv, item);
+
+    contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
+  };
+
+  const updateItemDivWithItem = (itemDiv, item) => {
     itemDiv.querySelector('.item-name').innerHTML = item.name;
     itemDiv.querySelector('.item-due-date').innerHTML = item.dueDate;
     itemDiv.querySelector('.item-description').innerHTML = item.description;
     itemDiv.querySelector('.item-project').innerHTML = item.project;
     itemDiv.querySelector('.item-priority').innerHTML = item.priority;
-
-    const contentDiv = document.querySelector('.content');
-    contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
   };
 
   const showHideItemInfo = (itemDiv) => {
@@ -81,9 +88,8 @@ const domController = (() => {
     itemDiv.className = 'item';
     //set item unique ID maybe dont need?
 
-    itemDiv.appendChild(getItemPromptElements());
+    itemDiv.appendChild(getItemTemplateElements('new-item-prompt-template'));
 
-    const contentDiv = document.querySelector('.content');
     contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
   };
 
@@ -91,10 +97,8 @@ const domController = (() => {
     itemDiv.remove();
   };
 
-  const getItemPromptElements = () => {
-    const itemPromptTemplate = document.querySelector(
-      '#new-item-prompt-template'
-    );
+  const getItemTemplateElements = (templateID) => {
+    const itemPromptTemplate = document.querySelector('#' + templateID);
     let htmlElements = itemPromptTemplate.content.cloneNode(true);
     return htmlElements;
   };
@@ -127,6 +131,7 @@ const domController = (() => {
     renderItemsFromATab,
     renderItemEditMode,
     discardItemEditMode,
+    updateItemFromDiv,
     renderNewItem,
     showHideItemInfo,
     renderNewItemPrompt,

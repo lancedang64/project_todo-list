@@ -58,7 +58,10 @@ const coordinator = (() => {
 
 
   const updateItem = (e) => {
-
+    const itemDiv = getItemDivFromEvent(e);
+    const updatedItem = dataController.updateAndGetItemFromDiv(itemDiv);
+    if (!updatedItem) domController.remindNewItemInput();
+    domController.updateItemFromDiv(itemDiv, updatedItem);
   };
 
   const deleteItem = (e) => {
