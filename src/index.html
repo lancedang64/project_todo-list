@@ -13,14 +13,14 @@
     </header>
     <div id="side-nav" class="side-nav">
       <button id='add-new-item'>Add new task</button>
-      <a href="#">All items</a>
+      <a href="#" id="all-items" class="tab tab--selected">All items</a>
       <span>Projects</span>
       <a href="#">Coding</a>
       <a href="#">Life</a>
       <a href="#">Other</a>
     </div>
     <div id="content" class="content">
-      <div class="item" id="item#1">
+      <!-- <div class="item" id="item#1">
         <div class="item-banner">
           <label class="checkbox-container">
             <input type="checkbox" />
@@ -43,7 +43,7 @@
             <button>Delete</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <template id="new-item-prompt-template">
       <div class="item-banner item-banner--editing">
@@ -52,31 +52,31 @@
           <span class="custom-checkbox"></span>
         </label>
         <input type="text" placeholder="Task name" class="item-name item-name--editing"></input>
-        <input type="date" class="item-date--editing"></input>
+        <input type="date" class="item-due-date item-due-date--editing"></input>
       </div>
       <div class="item-info item-info--editing item-info--expanded">
         <label>Description: </label>
-        <input type="text" class="item-description--editing">
+        <input type="text" class="item-description item-description--editing">
         <label>Project: </label>
-        <select name="projects" id="projects" class="item-project--editing">
-          <option value="coding">Coding</option>
-          <option value="life">Life</option>
-          <option value="other">Other</option>
+        <select name="projects" class="item-project item-project--editing">
+          <option value="Coding">Coding</option>
+          <option value="Life">Life</option>
+          <option value="Other">Other</option>
           <!-- Need to be dynamic!!! -->
         </select>
         <span>Priority: </span>
         <div>
-          <input type="radio" id="priority!" name="priority" value="!" checked="yes">
-          <label for="priority!" class='priority-label'>!</label>
-          <input type="radio" id="priority!!" name="priority" value="!!">
-          <label for="priority!!" class='priority-label'>!!</label>
-          <input type="radio" id="priority!!!" name="priority" value="!!!">
-          <label for="priority!!!" class='priority-label'>!!!</label>
+          <input type="radio" id="priority1" name="priority" value="!" checked="yes">
+          <label for="priority1" class='priority-label'>!</label>
+          <input type="radio" id="priority2" name="priority" value="!!">
+          <label for="priority2" class='priority-label'>!!</label>
+          <input type="radio" id="priority3" name="priority" value="!!!">
+          <label for="priority3" class='priority-label'>!!!</label>
         </div>
         <br>
         <div>
           <button class="discard">Discard</button>
-          <button class="save-new-item">Save</button>
+          <button class="save">Save</button>
         </div>
       </div>
     </template>
@@ -99,8 +99,8 @@
         <span class="item-priority"></span>
         <br>
         <div>
-          <button>Edit</button>
-          <button>Delete</button>
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
         </div>
       </div>
     </template>

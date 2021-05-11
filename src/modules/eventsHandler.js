@@ -1,30 +1,55 @@
 import coordinator from './coordinator.js';
 
 const eventsHandler = (() => {
-    const addListenersOnPageLoad = () => {
-        addListenerNewItem(document);
-        addListenersShowHideItemInfo(document);
-    };
+  const addListenersInHomePage = () => {
+    addListenerNewItem(document);
+    addListenersShowHideItemInfo(document);
+    // Add nav a tag listeners ()
+  };
 
-    const addListenerNewItem = (element) => {
-        const newItemButton = element.querySelector('#add-new-item');
-        newItemButton.addEventListener('click', coordinator.promptNewItem);
-    };
+  const addListenerNewItem = (element) => {
+    const newItemButton = element.querySelector('#add-new-item');
+    newItemButton.addEventListener('click', coordinator.promptNewItem);
+  };
 
-    const addListenersShowHideItemInfo = (element) => {
-        const showInfoButtons = element.querySelectorAll('.show-info');
-        showInfoButtons.forEach(button => button.addEventListener('click', coordinator.showHideItemInfo))
-    };
+  const addListenersShowHideItemInfo = (element) => {
+    const showInfoButtons = element.querySelectorAll('.show-info');
+    showInfoButtons.forEach((button) =>
+      button.addEventListener('click', coordinator.showHideItemInfo)
+    );
+  };
 
-    const addListenersNewItemPrompt = () => {
-        const discardButton = document.querySelector('.discard');
-        discardButton.addEventListener('click', coordinator.discardNewItemPrompt)
+  const addListenersNewItemPrompt = () => {
+    const discardButton = document.querySelector('.discard');
+    discardButton.addEventListener('click', coordinator.discardNewItemPrompt);
 
-        const saveNewButton = document.querySelector('.save-new-item');
-        saveNewButton.addEventListener('click', coordinator.saveNewItem)
-    }
+    const saveButton = document.querySelector('.save');
+    saveButton.addEventListener('click', coordinator.saveNewItem);
+  };
 
-    return {addListenersOnPageLoad, addListenersNewItemPrompt, addListenersShowHideItemInfo}
+  const addListenersItemInfo = (element) => {
+    const editButton = element.querySelector('.edit');
+    editButton.addEventListener('click', coordinator.editItem);
+
+    const deleteButton = element.querySelector('.delete');
+    deleteButton.addEventListener('click', coordinator.deleteItem);
+  };
+
+  const addListenersItemEdit = (itemDiv) => {
+    const discardButton = itemDiv.querySelector('.discard');
+    discardButton.addEventListener('click', coordinator.discardItemEdit);
+    
+    const saveButton = itemDiv.querySelector('.save');
+    saveButton.addEventListener('click', coordinator.updateItem);
+  };
+
+  return {
+    addListenersInHomePage,
+    addListenersNewItemPrompt,
+    addListenersShowHideItemInfo,
+    addListenersItemInfo,
+    addListenersItemEdit
+  };
 })();
 
 export default eventsHandler;

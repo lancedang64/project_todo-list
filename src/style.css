@@ -60,7 +60,11 @@ header {
   text-align: center;
 }
 
-.side-nav button {
+.tab--selected {
+  background-color: #c3c3c3;
+}
+
+#add-new-item {
   display: block;
   font-size: 1.5em;
   margin: 1em auto 1em auto;
@@ -125,6 +129,7 @@ header {
 
 .checkbox-container input:checked ~ .custom-checkbox:after {
   display: block;
+  animation: fade-in 0.5s;
 }
 
 .checkbox-container .custom-checkbox:after {
@@ -190,6 +195,10 @@ input[type='radio']:checked + label {
   font-size: 1em;
   margin: 0.5em 1em 1em 0;
   padding: 0.5em 1em;
+}
+
+.hidden {
+  display: none;
 }
 
 @keyframes appear {
