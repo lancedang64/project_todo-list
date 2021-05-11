@@ -22,9 +22,12 @@
     <div id="content" class="content">
       <div class="item" id="item#1">
         <div class="item-banner">
-          <input type="checkbox" />
-          <span> Do interview questions </span>
-          <span>Due 9/5/21</span>
+          <label class="checkbox-container">
+            <input type="checkbox" />
+            <span class="custom-checkbox"></span>
+          </label>
+          <span class="item-name">Do interview questions</span>
+          <span class="item-due-date">09/05/21</span>
           <button class="show-info">...</button>
         </div>
         <div class="item-info">
@@ -76,7 +79,10 @@
     </template>
     <template id="new-item-template">
       <div class="item-banner">
-        <input type="checkbox" />
+        <label class='checkbox-container'>
+          <input type="checkbox" />
+          <span class="custom-checkbox"></span>
+        </label>
         <span class='item-name'></span>
         <span class='item-due-date'></span>
         <button class="show-info">...</button>

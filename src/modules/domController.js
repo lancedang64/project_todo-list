@@ -9,7 +9,7 @@ const domController = (() => {
     itemDiv.appendChild(clone);
 
     itemDiv.querySelector('.item-name').innerHTML = item.name;
-    itemDiv.querySelector('.item-due-date').innerHTML = 'Due ' + item.dueDate;
+    itemDiv.querySelector('.item-due-date').innerHTML = item.dueDate;
     itemDiv.querySelector('.item-description').innerHTML = item.description;
     itemDiv.querySelector('.item-project').innerHTML = item.project;
     itemDiv.querySelector('.item-priority').innerHTML = item.priority;

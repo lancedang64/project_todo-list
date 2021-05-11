@@ -65,7 +65,7 @@ header {
   font-size: 1.5em;
   margin: 1em auto 1em auto;
   padding: 1em;
-  background-color: #23ce6b;
+  background-color: #F8D48B;
 }
 
 .content {
@@ -89,7 +89,56 @@ header {
   padding: 0.5em;
   display: grid;
   grid-template-columns: 0.5fr 4fr 1.7fr 0.5fr;
+  align-items: center;
   gap: 2%;
+}
+
+.checkbox-container {
+  display: block;
+  cursor: pointer;
+  display:flex;
+}
+
+.checkbox-container input {
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  height: 1.5em;
+  width: 1.5em;
+  border: solid black 2px;
+  border-radius: 1.5em;
+  margin: auto 0;
+}
+
+.checkbox-container input:checked ~ .custom-checkbox {
+  background-color: #23ce6b;
+}
+
+.custom-checkbox:after {
+  content: "";
+  position: relative;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .custom-checkbox:after {
+  display: block;
+}
+
+.checkbox-container .custom-checkbox:after {
+  left: 0.5em;
+  top: 0.2em;
+  width: 0.2em;
+  height: 0.7em;
+  border: solid white;
+  border-width: 0 0.2em 0.2em 0;
+  transform: rotate(45deg);
+}
+
+.show-info {
+  height: 3em;
 }
 
 .item-banner--editing,
@@ -102,6 +151,8 @@ header {
 .item-info--editing select {
   font-size: 1em;
 }
+
+/*item-info--editing elements*/
 
 input[type='radio'] {
   display: none;
