@@ -25,6 +25,21 @@ header {
   font-size: 1em;
   padding-left: 2%;
   border: solid 1px rgb(49, 49, 49);
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.github-logo {
+  background-image: url(./images/GitHub-Mark-32px.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 2em;
+  width: 2em;
 }
 
 .side-nav {
