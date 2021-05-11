@@ -97,6 +97,13 @@ const domController = (() => {
     itemDiv.remove();
   };
 
+  const toggleItemCompletion = (itemDiv) => {
+    toggleCompletedItemDOM(itemDiv);
+    moveCompletedItem(itemDiv);
+  };
+
+  /* private functions */
+
   const getItemTemplateElements = (templateID) => {
     const itemPromptTemplate = document.querySelector('#' + templateID);
     let htmlElements = itemPromptTemplate.content.cloneNode(true);
@@ -127,6 +134,28 @@ const domController = (() => {
     }
   };
 
+  const toggleCompletedItemDOM = (itemDiv) => {
+    const itemName = itemDiv.querySelector('.item-name');
+    const dueDate = itemDiv.querySelector('.item-due-date');
+    const checkbox = itemDiv.querySelector('.checkbox');
+    checkbox.checked
+      ? ((itemName.style.textDecoration = 'line-through'),
+        (dueDate.style.textDecoration = 'line-through'),
+        itemDiv.classList.add('item--completed'))
+      : ((itemName.style.textDecoration = 'none'),
+        (dueDate.style.textDecoration = 'none'),
+        itemDiv.classList.remove('item--completed'));
+  };
+
+  const moveCompletedItem = (itemDiv) => {
+    contentDiv.removeChild(itemDiv);
+    const topCompletedItem = document.querySelector('.item--completed');
+
+    topCompletedItem
+      ? contentDiv.insertBefore(itemDiv, topCompletedItem)
+      : contentDiv.appendChild(itemDiv);
+  };
+
   return {
     renderItemsFromATab,
     renderItemEditMode,
@@ -138,6 +167,7 @@ const domController = (() => {
     remindNewItemPrompt,
     remindNewItemInput,
     removeItemDiv,
+    toggleItemCompletion,
   };
 })();
 

@@ -4,6 +4,7 @@ const eventsHandler = (() => {
   const addListenersInHomePage = () => {
     addListenerNewItem(document);
     addListenersShowHideItemInfo(document);
+    addListenersCheckbox(document);
     // Add nav a tag listeners ()
   };
 
@@ -38,9 +39,16 @@ const eventsHandler = (() => {
   const addListenersItemEdit = (itemDiv) => {
     const discardButton = itemDiv.querySelector('.discard');
     discardButton.addEventListener('click', coordinator.discardItemEdit);
-    
+
     const saveButton = itemDiv.querySelector('.save');
-    saveButton.addEventListener('click', coordinator.updateItem);
+    saveButton.addEventListener('click', coordinator.saveEditedItem);
+  };
+
+  const addListenersCheckbox = (element) => {
+    const checkboxes = element.querySelectorAll('.checkbox');
+    checkboxes.forEach((checkbox) =>
+      checkbox.addEventListener('click', coordinator.toggleItemCompletion)
+    );
   };
 
   return {
@@ -48,7 +56,8 @@ const eventsHandler = (() => {
     addListenersNewItemPrompt,
     addListenersShowHideItemInfo,
     addListenersItemInfo,
-    addListenersItemEdit
+    addListenersItemEdit,
+    addListenersCheckbox,
   };
 })();
 

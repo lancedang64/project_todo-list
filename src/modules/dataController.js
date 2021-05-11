@@ -47,6 +47,11 @@ const dataController = (() => {
     allItems.splice(itemIndex, 1);
   };
 
+  const toggleItemCompletion = (itemDiv) => {
+    const item = getItemFromDiv(itemDiv);
+    item.isDone === false ? item.isDone = true : item.isDone = false;
+  };
+
   const getItemFromDiv = (itemDiv) => {
     const itemName = itemDiv.querySelector('.item-name').innerHTML;
     return allItems.find((item) => item.name === itemName);
@@ -59,7 +64,8 @@ const dataController = (() => {
     addToAllItems,
     deleteItem,
     getItemFromDiv,
-    updateAndGetItemFromDiv
+    updateAndGetItemFromDiv,
+    toggleItemCompletion
   };
 })();
 

@@ -57,7 +57,7 @@ const coordinator = (() => {
   };
 
 
-  const updateItem = (e) => {
+  const saveEditedItem = (e) => {
     const itemDiv = getItemDivFromEvent(e);
     const updatedItem = dataController.updateAndGetItemFromDiv(itemDiv);
     if (!updatedItem) domController.remindNewItemInput();
@@ -70,8 +70,14 @@ const coordinator = (() => {
     domController.removeItemDiv(itemDiv);
   };
 
+  const toggleItemCompletion = (e) => {
+    const itemDiv = getItemDivFromEvent(e);
+    dataController.toggleItemCompletion(itemDiv);
+    domController.toggleItemCompletion(itemDiv);
+  };
+
   const getItemDivFromEvent = (e) => {
-    return e.path.find(element => element.className === 'item');
+    return e.path.find(element => element.classList.contains('item'));
   };
 
   return {
@@ -82,8 +88,9 @@ const coordinator = (() => {
     saveNewItem,
     editItem,
     discardItemEdit,
-    updateItem,
-    deleteItem
+    saveEditedItem,
+    deleteItem,
+    toggleItemCompletion
   };
 })();
 
