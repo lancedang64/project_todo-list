@@ -53,6 +53,7 @@ const dataController = (() => {
   };
 
   return {
+    allItems,
     getItemsFromTab,
     getItemFromInput,
     addToAllItems,
