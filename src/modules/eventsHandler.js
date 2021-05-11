@@ -3,7 +3,7 @@ import coordinator from './coordinator.js';
 const eventsHandler = (() => {
     const addListenersOnPageLoad = () => {
         addListenerNewItem(document);
-        addListenerShowInfo(document);
+        addListenersShowHideItemInfo(document);
     };
 
     const addListenerNewItem = (element) => {
@@ -11,7 +11,7 @@ const eventsHandler = (() => {
         newItemButton.addEventListener('click', coordinator.promptNewItem);
     };
 
-    const addListenerShowInfo = (element) => {
+    const addListenersShowHideItemInfo = (element) => {
         const showInfoButtons = element.querySelectorAll('.show-info');
         showInfoButtons.forEach(button => button.addEventListener('click', coordinator.showHideItemInfo))
     };
@@ -24,7 +24,7 @@ const eventsHandler = (() => {
         saveNewButton.addEventListener('click', coordinator.saveNewItem)
     }
 
-    return {addListenersOnPageLoad, addListenersNewItemPrompt}
+    return {addListenersOnPageLoad, addListenersNewItemPrompt, addListenersShowHideItemInfo}
 })();
 
 export default eventsHandler;

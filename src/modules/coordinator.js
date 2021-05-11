@@ -21,16 +21,17 @@ const coordinator = (() => {
   };
 
   const saveNewItem = (e) => {
-    const itemDiv = e.path[3];
-    const item = dataController.getItemFromInput(itemDiv);
+    const itemPrompt = e.path[3];
+    const item = dataController.getItemFromInput(itemPrompt);
     if (!item) {
       domController.remindNewItemInput();
       return;
     }
     dataController.addToAllItems(item);
     domController.discardNewItemPrompt(e);
-    console.log(item);
     domController.renderNewItem(item);
+    const newItemDiv = document.querySelector('.item');
+    eventsHandler.addListenersShowHideItemInfo(newItemDiv);
     // localStorageController update
   };
 
