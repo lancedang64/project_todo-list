@@ -47,7 +47,10 @@
     </div>
     <template id="new-item-prompt-template">
       <div class="item-banner item-banner--editing">
-        <input type="checkbox" />
+        <label class='checkbox-container'>
+          <input type="checkbox" disabled="disabled"/>
+          <span class="custom-checkbox"></span>
+        </label>
         <input type="text" placeholder="Task name" class="item-name item-name--editing"></input>
         <input type="date" class="item-date--editing"></input>
       </div>
