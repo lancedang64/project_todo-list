@@ -1,8 +1,38 @@
 const domController = (() => {
   const contentDiv = document.querySelector('.content');
 
-  const renderItemsFromATab = (itemsArr) => {
+  const renderExampleItems = (itemsArr) => {
     itemsArr.forEach((item) => renderNewItem(item));
+  };
+
+  const showTabContent = (tabName) => {
+    const allItemDivs = document.querySelectorAll('.item');
+    if (tabName === 'All items') {
+      allItemDivs.forEach((itemDiv) => showItemDiv(itemDiv));
+      return;
+    }
+    const tabItemDivs = getItemDivsFromTabName(tabName);
+    allItemDivs.forEach((itemDiv) => hideItemDiv(itemDiv));
+    tabItemDivs.forEach((itemDiv) => showItemDiv(itemDiv));
+  };
+
+  const showItemDiv = (itemDiv) => {
+    if (itemDiv.classList.contains('hidden'))
+      itemDiv.classList.remove('hidden');
+  };
+
+  const hideItemDiv = (itemDiv) => {
+    if (!itemDiv.classList.contains('hidden')) itemDiv.classList.add('hidden');
+  };
+
+  const getItemDivsFromTabName = (tabName) => {
+    const allItemDivs = document.querySelectorAll('.item');
+    const chosenItemDivs = new Array();
+    allItemDivs.forEach((itemDiv) => {
+      const itemProject = itemDiv.querySelector('.item-project').innerHTML;
+      if (itemProject === tabName) chosenItemDivs.push(itemDiv);
+    });
+    return chosenItemDivs;
   };
 
   const renderItemEditMode = (itemDiv, item) => {
@@ -29,25 +59,11 @@ const domController = (() => {
     updateItemDivWithItem(itemDiv, updatedItem);
   };
 
-  const toggleItemContentDisplay = (itemDiv) => {
-    const itemBanner = itemDiv.querySelector('.item-banner');
-    const itemInfo = itemDiv.querySelector('.item-info');
-    itemBanner.classList.contains('hidden')
-      ? itemBanner.classList.remove('hidden')
-      : itemBanner.classList.add('hidden');
-    itemInfo.classList.contains('hidden')
-      ? itemInfo.classList.remove('hidden')
-      : itemInfo.classList.add('hidden');
-  };
-
   const renderNewItem = (item) => {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
-
     itemDiv.appendChild(getItemTemplateElements('new-item-template'));
-
     updateItemDivWithItem(itemDiv, item);
-
     contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
   };
 
@@ -104,6 +120,17 @@ const domController = (() => {
 
   /* private functions */
 
+  const toggleItemContentDisplay = (itemDiv) => {
+    const itemBanner = itemDiv.querySelector('.item-banner');
+    const itemInfo = itemDiv.querySelector('.item-info');
+    itemBanner.classList.contains('hidden')
+      ? itemBanner.classList.remove('hidden')
+      : itemBanner.classList.add('hidden');
+    itemInfo.classList.contains('hidden')
+      ? itemInfo.classList.remove('hidden')
+      : itemInfo.classList.add('hidden');
+  };
+
   const getItemTemplateElements = (templateID) => {
     const itemPromptTemplate = document.querySelector('#' + templateID);
     let htmlElements = itemPromptTemplate.content.cloneNode(true);
@@ -157,8 +184,9 @@ const domController = (() => {
   };
 
   return {
-    renderItemsFromATab,
+    renderExampleItems,
     renderItemEditMode,
+    showTabContent,
     discardItemEditMode,
     updateItemFromDiv,
     renderNewItem,

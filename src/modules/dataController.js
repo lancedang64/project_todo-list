@@ -4,7 +4,8 @@ const dataController = (() => {
   const allItems = [];
 
   const getItemsFromTab = (tabName) => {
-    if ((tabName = 'all-items')) return allItems;
+    if (tabName === 'All items') return allItems;
+    return allItems.filter(item => item.project === tabName);
   };
 
   const getItemFromInput = (itemDiv) => {

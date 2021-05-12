@@ -4,8 +4,11 @@ import dataController from './dataController.js';
 
 const coordinator = (() => {
   const loadHomePage = () => {
-    const allItems = dataController.getItemsFromTab('all-items');
-    domController.renderItemsFromATab(allItems);
+    // if there is localStorage then load contentDiv All items innerHTML
+    // and append listeners hompage
+    // else render example items and projects
+    const allItems = dataController.getItemsFromTab('All items');
+    domController.renderExampleItems(allItems);
     eventsHandler.addListenersInHomePage();
   }
 
@@ -76,6 +79,14 @@ const coordinator = (() => {
     domController.toggleItemCompletion(itemDiv);
   };
 
+  const renderTab = (e) => {
+    const tabName = e.target.innerHTML;
+    const items = dataController.getItemsFromTab(tabName);
+    domController.showTabContent(tabName);
+  };
+
+  /* private functions */
+
   const getItemDivFromEvent = (e) => {
     return e.path.find(element => element.classList.contains('item'));
   };
@@ -90,7 +101,8 @@ const coordinator = (() => {
     discardItemEdit,
     saveEditedItem,
     deleteItem,
-    toggleItemCompletion
+    toggleItemCompletion,
+    renderTab
   };
 })();
 

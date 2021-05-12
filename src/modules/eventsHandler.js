@@ -5,7 +5,7 @@ const eventsHandler = (() => {
     addListenerNewItem(document);
     addListenersShowHideItemInfo(document);
     addListenersCheckbox(document);
-    // Add nav a tag listeners ()
+    addListenersTab(document);
   };
 
   const addListenerNewItem = (element) => {
@@ -51,6 +51,11 @@ const eventsHandler = (() => {
     );
   };
 
+  const addListenersTab = (element) => {
+    const tabs = element.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.addEventListener('click', coordinator.renderTab));
+  };
+
   return {
     addListenersInHomePage,
     addListenersNewItemPrompt,
@@ -58,6 +63,7 @@ const eventsHandler = (() => {
     addListenersItemInfo,
     addListenersItemEdit,
     addListenersCheckbox,
+    addListenersTab
   };
 })();
 
