@@ -9,7 +9,7 @@ const eventsHandler = (() => {
   };
 
   const addListenerNewItem = (element) => {
-    const newItemButton = element.querySelector('#add-new-item');
+    const newItemButton = element.querySelector('.add-new-item');
     newItemButton.addEventListener('click', coordinator.promptNewItem);
   };
 

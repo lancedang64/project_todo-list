@@ -7,7 +7,11 @@ const domController = (() => {
 
   const showTabContent = (tabName, tabElement) => {
     highlightChosenTab(tabElement);
+    changeTabName(tabName);
+    hideNotTabItems(tabName);
+  };
 
+  const hideNotTabItems = (tabName) => {
     const allItemDivs = document.querySelectorAll('.item');
     if (tabName === 'All items') {
       allItemDivs.forEach((itemDiv) => showItemDiv(itemDiv));
@@ -22,6 +26,11 @@ const domController = (() => {
     const previousTab = document.querySelector('.tab--selected');
     previousTab.classList.remove('tab--selected');
     tabElement.classList.add('tab--selected');
+  };
+
+  const changeTabName = (tabName) => {
+    const tabNameSpan = document.querySelector('.tab-name');
+    tabNameSpan.innerHTML = tabName;
   };
 
   const showItemDiv = (itemDiv) => {
@@ -72,7 +81,7 @@ const domController = (() => {
     itemDiv.className = 'item';
     itemDiv.appendChild(getItemTemplateElements('new-item-template'));
     updateItemDivWithItem(itemDiv, item);
-    contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
+    appendElementAfterTabPanel(itemDiv);
   };
 
   const updateItemDivWithItem = (itemDiv, item) => {
@@ -110,11 +119,15 @@ const domController = (() => {
   const renderNewItemPrompt = () => {
     const itemDiv = document.createElement('div');
     itemDiv.className = 'item';
-    //set item unique ID maybe dont need?
-
     itemDiv.appendChild(getItemTemplateElements('new-item-prompt-template'));
+    appendElementAfterTabPanel(itemDiv);
+  };
 
-    contentDiv.insertBefore(itemDiv, contentDiv.firstChild);
+  const appendElementAfterTabPanel = (element) => {
+    const firstItem = document.querySelector('.item');
+    firstItem
+      ? contentDiv.insertBefore(element, firstItem)
+      : contentDiv.appendChild(element);
   };
 
   const removeItemDiv = (itemDiv) => {

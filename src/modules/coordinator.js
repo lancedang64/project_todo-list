@@ -6,13 +6,13 @@ import itemFactory from './item.js';
 const coordinator = (() => {
   const loadHomePage = () => {
     // if there is localStorage then load contentDiv All items innerHTML
-    loadFirstTimeHomePage();
+    createExampleItems();
     const allItems = dataController.getItemsFromTab('All items');
     domController.renderExampleItems(allItems);
     eventsHandler.addListenersInHomePage();
   };
 
-  const loadFirstTimeHomePage = () => {
+  const createExampleItems = () => {
     const myItem = itemFactory(
       'Learn Shortcuts',
       'James website',

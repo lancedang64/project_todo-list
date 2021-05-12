@@ -2,6 +2,7 @@ import itemFactory from './item.js';
 
 const dataController = (() => {
   const allItems = [];
+  const projects = [];
 
   const getItemsFromTab = (tabName) => {
     if (tabName === 'All items') return allItems;
