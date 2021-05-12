@@ -5,7 +5,9 @@ const domController = (() => {
     itemsArr.forEach((item) => renderNewItem(item));
   };
 
-  const showTabContent = (tabName) => {
+  const showTabContent = (tabName, tabElement) => {
+    highlightChosenTab(tabElement);
+
     const allItemDivs = document.querySelectorAll('.item');
     if (tabName === 'All items') {
       allItemDivs.forEach((itemDiv) => showItemDiv(itemDiv));
@@ -14,6 +16,12 @@ const domController = (() => {
     const tabItemDivs = getItemDivsFromTabName(tabName);
     allItemDivs.forEach((itemDiv) => hideItemDiv(itemDiv));
     tabItemDivs.forEach((itemDiv) => showItemDiv(itemDiv));
+  };
+
+  const highlightChosenTab = (tabElement) => {
+    const previousTab = document.querySelector('.tab--selected');
+    previousTab.classList.remove('tab--selected');
+    tabElement.classList.add('tab--selected');
   };
 
   const showItemDiv = (itemDiv) => {

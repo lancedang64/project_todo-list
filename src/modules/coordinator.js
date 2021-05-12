@@ -6,8 +6,6 @@ import itemFactory from './item.js';
 const coordinator = (() => {
   const loadHomePage = () => {
     // if there is localStorage then load contentDiv All items innerHTML
-    // and append listeners hompage
-    // else render example items and projects
     loadFirstTimeHomePage();
     const allItems = dataController.getItemsFromTab('All items');
     domController.renderExampleItems(allItems);
@@ -118,8 +116,8 @@ const coordinator = (() => {
 
   const renderTab = (e) => {
     const tabName = e.target.innerHTML;
-    const items = dataController.getItemsFromTab(tabName);
-    domController.showTabContent(tabName);
+    const tabElement = e.path[0];
+    domController.showTabContent(tabName, tabElement);
   };
 
   /* private functions */
