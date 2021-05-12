@@ -1,16 +1,54 @@
 import domController from './domController.js';
 import eventsHandler from './eventsHandler.js';
 import dataController from './dataController.js';
+import itemFactory from './item.js';
 
 const coordinator = (() => {
   const loadHomePage = () => {
     // if there is localStorage then load contentDiv All items innerHTML
     // and append listeners hompage
     // else render example items and projects
+    loadFirstTimeHomePage();
     const allItems = dataController.getItemsFromTab('All items');
     domController.renderExampleItems(allItems);
     eventsHandler.addListenersInHomePage();
-  }
+  };
+
+  const loadFirstTimeHomePage = () => {
+    const myItem = itemFactory(
+      'Learn Shortcuts',
+      'James website',
+      '01/06/2021',
+      'Coding',
+      '!!'
+    );
+    const myItem2 = itemFactory(
+      'Study React',
+      'Do TOP projects',
+      '07/06/2021',
+      'Coding',
+      '!!!'
+    );
+    const myItem3 = itemFactory(
+      'Do interview questions',
+      'Leetcode',
+      '10/06/2021',
+      'Coding',
+      '!'
+    );
+    const myItem4 = itemFactory(
+      'Do groceries shopping',
+      'at Woolies',
+      '02/06/2021',
+      'Life',
+      '!'
+    );
+
+    dataController.addToAllItems(myItem);
+    dataController.addToAllItems(myItem2);
+    dataController.addToAllItems(myItem3);
+    dataController.addToAllItems(myItem4);
+  };
 
   const promptNewItem = () => {
     if (document.querySelector('.item-banner--editing')) {
@@ -59,7 +97,6 @@ const coordinator = (() => {
     domController.discardItemEditMode(itemDiv);
   };
 
-
   const saveEditedItem = (e) => {
     const itemDiv = getItemDivFromEvent(e);
     const updatedItem = dataController.updateAndGetItemFromDiv(itemDiv);
@@ -88,11 +125,11 @@ const coordinator = (() => {
   /* private functions */
 
   const getItemDivFromEvent = (e) => {
-    return e.path.find(element => element.classList.contains('item'));
+    return e.path.find((element) => element.classList.contains('item'));
   };
 
   return {
-    loadHomePage, 
+    loadHomePage,
     promptNewItem,
     showHideItemInfo,
     discardNewItemPrompt,
@@ -102,7 +139,7 @@ const coordinator = (() => {
     saveEditedItem,
     deleteItem,
     toggleItemCompletion,
-    renderTab
+    renderTab,
   };
 })();
 
