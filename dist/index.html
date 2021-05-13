@@ -11,14 +11,20 @@
       <a href="https://github.com/lancedang64/project_todo-list" class="github-logo"></a>
     </header>
     <div id="side-nav" class="side-nav">
-      <button id='add-new-item'>Add new task</button>
       <a href="#" id="all-items" class="tab tab--selected">All items</a>
       <span>Projects</span>
-      <a href="#">Coding</a>
-      <a href="#">Life</a>
-      <a href="#">Other</a>
+      <a href="#" class='tab'>Coding</a>
+      <a href="#" class='tab'>Life</a>
+      <a href="#" class='tab'>Other</a>
     </div>
     <div id="content" class="content">
+      <div class="tab-panel">
+        <span class="tab-name">All items</span>
+        <button class='add-new-item'>Add new item</button>
+        <button class="add-new-project">Add new project</button>
+        <button class="delete-project">Delete project</button>
+      </div>
+    </div>
     </div>
     <template id="new-item-prompt-template">
       <div class="item-banner item-banner--editing">
@@ -58,7 +64,7 @@
     <template id="new-item-template">
       <div class="item-banner">
         <label class='checkbox-container'>
-          <input type="checkbox" />
+          <input type="checkbox" class="checkbox"/>
           <span class="custom-checkbox"></span>
         </label>
         <span class='item-name'></span>
@@ -82,5 +88,3 @@
     <script src="bundle.js"></script>
   </body>
 </html>
-
-

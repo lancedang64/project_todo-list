@@ -2,15 +2,25 @@ import coordinator from './coordinator.js';
 
 const eventsHandler = (() => {
   const addListenersInHomePage = () => {
-    addListenerNewItem(document);
+    addListenersTabPanel(document);
     addListenersShowHideItemInfo(document);
     addListenersCheckbox(document);
     addListenersTab(document);
   };
 
-  const addListenerNewItem = (element) => {
+  const addListenersTabPanel = (element) => {
     const newItemButton = element.querySelector('.add-new-item');
     newItemButton.addEventListener('click', coordinator.promptNewItem);
+
+    const newProjectButton = element.querySelector('.add-new-project');
+    newProjectButton.addEventListener('click', coordinator.promptNewProject);
+
+    const deleteProjectButton = element.querySelector('.delete-project');
+    deleteProjectButton.addEventListener('click', coordinator.promptDeleteProject)
+  };
+
+  const addListenersNewProjectPrompt = () => {
+    
   };
 
   const addListenersShowHideItemInfo = (element) => {
@@ -59,6 +69,7 @@ const eventsHandler = (() => {
   return {
     addListenersInHomePage,
     addListenersNewItemPrompt,
+    addListenersNewProjectPrompt,
     addListenersShowHideItemInfo,
     addListenersItemInfo,
     addListenersItemEdit,

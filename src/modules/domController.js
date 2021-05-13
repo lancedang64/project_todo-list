@@ -205,18 +205,18 @@ const domController = (() => {
   };
 
   return {
+    discardItemEditMode,
+    remindNewItemInput,
+    remindNewItemPrompt,
+    removeItemDiv,
     renderExampleItems,
     renderItemEditMode,
-    showTabContent,
-    discardItemEditMode,
-    updateItemFromDiv,
     renderNewItem,
-    showHideItemInfo,
     renderNewItemPrompt,
-    remindNewItemPrompt,
-    remindNewItemInput,
-    removeItemDiv,
+    showHideItemInfo,
+    showTabContent,
     toggleItemCompletion,
+    updateItemFromDiv,
   };
 })();
 

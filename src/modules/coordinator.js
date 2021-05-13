@@ -48,6 +48,15 @@ const coordinator = (() => {
     dataController.addToAllItems(myItem4);
   };
 
+  const promptNewProject = (e) => {
+    domController.renderNewProjectPrompt();
+    eventsHandler.addListenersNewProjectPrompt();
+  };
+
+  const promptDeleteProject = (e) => {
+    const tabDiv = getTabDivFromEvent(e);
+  };
+
   const promptNewItem = () => {
     if (document.querySelector('.item-banner--editing')) {
       domController.remindNewItemPrompt();
@@ -125,19 +134,25 @@ const coordinator = (() => {
   const getItemDivFromEvent = (e) => {
     return e.path.find((element) => element.classList.contains('item'));
   };
+  
+  const getTabDivFromEvent = (e) => {
+    return document.querySelector('.tab-panel');
+  };
 
   return {
-    loadHomePage,
-    promptNewItem,
-    showHideItemInfo,
-    discardNewItemPrompt,
-    saveNewItem,
-    editItem,
-    discardItemEdit,
-    saveEditedItem,
     deleteItem,
-    toggleItemCompletion,
+    discardItemEdit,
+    discardNewItemPrompt,
+    editItem,
+    loadHomePage,
+    promptDeleteProject,
+    promptNewItem,
+    promptNewProject,
     renderTab,
+    saveEditedItem,
+    saveNewItem,
+    showHideItemInfo,
+    toggleItemCompletion,
   };
 })();
 

@@ -9,6 +9,7 @@ Hi, in this project I built a to do list
 ## Knowledge and skills learnt and used
 - npm package manager
   - webpack module bundler
+    - practices for developement mode and production mode
 
 - Javascript
   - DOM manipulation
