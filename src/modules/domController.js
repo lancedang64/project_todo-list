@@ -1,17 +1,17 @@
 const domController = (() => {
   const contentDiv = document.querySelector('.content');
+  const sideNav = document.querySelector('.side-nav');
 
   const renderExampleItems = (itemsArr) => {
     itemsArr.forEach((item) => renderNewItem(item));
   };
 
-  const renderNewProject = (name) =>  {
+  const renderNewProject = (name) => {
     renderTabOnSideNav(name);
     addProjectToSelect(name);
   };
 
   const renderTabOnSideNav = (name) => {
-    const sideNav = document.querySelector('.side-nav');
     const newTab = document.createElement('a');
     newTab.setAttribute('href', '#');
     newTab.setAttribute('class', 'tab');
@@ -20,14 +20,14 @@ const domController = (() => {
   };
 
   const addProjectToSelect = (name) => {
-    const template = document.querySelector('#new-item-prompt-template')
+    const template = document.querySelector('#new-item-prompt-template');
     const select = template.content.querySelector('.item-project--editing');
     const option = document.createElement('option');
     option.setAttribute('value', `${name}`);
     option.innerHTML = name;
     select.appendChild(option);
   };
-  
+
   const showTabContent = (tabName, tabElement) => {
     highlightChosenTab(tabElement);
     changeTabName(tabName);
@@ -46,14 +46,38 @@ const domController = (() => {
   };
 
   const highlightChosenTab = (tabElement) => {
-    const previousTab = document.querySelector('.tab--selected');
-    previousTab.classList.remove('tab--selected');
+    try {
+      const previousTab = document.querySelector('.tab--selected');
+      previousTab.classList.remove('tab--selected');
+    } catch (error) {
+      tabElement.classList.add('tab--selected');
+    }
     tabElement.classList.add('tab--selected');
   };
 
   const changeTabName = (tabName) => {
     const tabNameSpan = document.querySelector('.tab-name');
     tabNameSpan.innerHTML = tabName;
+  };
+
+  const deleteProject = (tabName) => {
+    removeProjectOnSideBar(tabName);
+    removeProjectOnNewItemPrompt(tabName);
+  };
+
+  const removeProjectOnSideBar = (tabName) => {
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach((tab) => {
+      if (tab.innerHTML === tabName) tab.remove();
+    });
+  };
+
+  const removeProjectOnNewItemPrompt = (tabName) => {
+    const template = document.querySelector('#new-item-prompt-template');
+    const options = template.content.querySelectorAll('option');
+    options.forEach((option) => {
+      if (option.innerHTML === tabName) option.remove();
+    });
   };
 
   const showItemDiv = (itemDiv) => {
@@ -161,7 +185,7 @@ const domController = (() => {
     toggleCompletedItemDOM(itemDiv);
     moveCompletedItem(itemDiv);
   };
-  
+
   const toggleItemContentDisplay = (itemDiv) => {
     const itemBanner = itemDiv.querySelector('.item-banner');
     const itemInfo = itemDiv.querySelector('.item-info');
@@ -230,6 +254,7 @@ const domController = (() => {
     remindNewItemInput,
     remindNewItemPrompt,
     removeItemDiv,
+    deleteProject,
     renderExampleItems,
     renderItemEditMode,
     renderNewItem,

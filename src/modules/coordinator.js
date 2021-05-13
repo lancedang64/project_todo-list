@@ -21,22 +21,51 @@ const coordinator = (() => {
     swal('Please enter your new project name:', {
       content: 'input',
     }).then((value) => {
-      if (value === null || value.trim() === '') return;
+      if (value === null || value.trim() === '') return alertInvalidName();
       domController.renderNewProject(value);
       const newTab = document.querySelector('.side-nav').lastChild;
       eventsHandler.addListenerTab(newTab);
     });
   };
 
+  const alertInvalidName = () => {
+    swal({
+      title: 'Sorry that was an invalid project name',
+      icon: 'error',
+    });
+  };
+
   const promptDeleteProject = (e) => {
-    const tabDiv = getTabDivFromEvent(e);
+    swal(deletePrompt).then((willDelete) => {
+      if (willDelete) deleteProject(e);
+    });
+  };
+
+  const deletePrompt = {
+    title: 'Are you sure you want to delete this project?',
+    text: '(You can still find items of this project in All items!)',
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+  };
+
+  const deleteProject = (e) => {
+    const projectTab = getTabDivFromEvent(e);
+    const tabName = projectTab.querySelector('.tab-name').innerHTML;
+    if (tabName === 'All items') return alertCannotDelete();
+    domController.deleteProject(tabName);
+  };
+
+  const alertCannotDelete = () => {
+    swal({
+      title: "Sorry you can't delete All items!",
+      icon: 'error',
+    });
   };
 
   const promptNewItem = () => {
-    if (document.querySelector('.item-banner--editing')) {
-      domController.remindNewItemPrompt();
-      return;
-    }
+    const isEditingItem = document.querySelector('.item-banner--editing');
+    if (isEditingItem) return domController.remindNewItemPrompt();
     domController.renderNewItemPrompt();
     eventsHandler.addListenersNewItemPrompt();
   };
@@ -55,17 +84,13 @@ const coordinator = (() => {
   const saveNewItem = (e) => {
     const itemDiv = getItemDivFromEvent(e);
     const item = dataController.getItemFromInput(itemDiv);
-    if (!isItemValid(item)) return;
+    if (!item) return domController.remindNewItemInput();
     dataController.addToAllItems(item);
     domController.removeItemDiv(itemDiv);
     domController.renderNewItem(item);
     const newItemDiv = document.querySelector('.item');
     eventsHandler.addListenersNewItemDiv(newItemDiv);
     // localStorageController update
-  };
-
-  const isItemValid = (item) => {
-    return item ? true : (domController.remindNewItemInput(), false);
   };
 
   const editItem = (e) => {
