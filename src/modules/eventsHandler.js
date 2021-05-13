@@ -19,6 +19,11 @@ const eventsHandler = (() => {
     deleteProjectButton.addEventListener('click', coordinator.promptDeleteProject)
   };
 
+  const addListenersNewItemDiv = (element) => {
+    addListenersShowHideItemInfo(element);
+    addListenersCheckbox(element);
+  };
+
   const addListenersShowHideItemInfo = (element) => {
     const showInfoButtons = element.querySelectorAll('.show-info');
     showInfoButtons.forEach((button) =>
@@ -69,6 +74,7 @@ const eventsHandler = (() => {
   return {
     addListenersInHomePage,
     addListenersNewItemPrompt,
+    addListenersNewItemDiv,
     addListenersShowHideItemInfo,
     addListenersItemInfo,
     addListenersItemEdit,

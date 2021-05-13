@@ -1,52 +1,20 @@
 import domController from './domController.js';
 import eventsHandler from './eventsHandler.js';
 import dataController from './dataController.js';
-import itemFactory from './item.js';
 import swal from 'sweetalert';
+import examples from './examples.js';
 
 const coordinator = (() => {
   const loadHomePage = () => {
     // if there is localStorage then load contentDiv All items innerHTML
-    createExampleItems();
+    importAndAddExamples();
     const allItems = dataController.getItemsFromTab('All items');
     domController.renderExampleItems(allItems);
     eventsHandler.addListenersInHomePage();
   };
 
-  const createExampleItems = () => {
-    const myItem = itemFactory(
-      'Learn Shortcuts',
-      'James website',
-      '01/06/2021',
-      'Coding',
-      '!!'
-    );
-    const myItem2 = itemFactory(
-      'Study React',
-      'Do TOP projects',
-      '07/06/2021',
-      'Coding',
-      '!!!'
-    );
-    const myItem3 = itemFactory(
-      'Do interview questions',
-      'Leetcode',
-      '10/06/2021',
-      'Coding',
-      '!'
-    );
-    const myItem4 = itemFactory(
-      'Do groceries shopping',
-      'at Woolies',
-      '02/06/2021',
-      'Life',
-      '!'
-    );
-
-    dataController.addToAllItems(myItem);
-    dataController.addToAllItems(myItem2);
-    dataController.addToAllItems(myItem3);
-    dataController.addToAllItems(myItem4);
+  const importAndAddExamples = () => {
+    examples.forEach((item) => dataController.addToAllItems(item));
   };
 
   const promptNewProject = (e) => {
@@ -92,8 +60,7 @@ const coordinator = (() => {
     domController.removeItemDiv(itemDiv);
     domController.renderNewItem(item);
     const newItemDiv = document.querySelector('.item');
-    eventsHandler.addListenersShowHideItemInfo(newItemDiv);
-    // eventsHandler add listener completion too
+    eventsHandler.addListenersNewItemDiv(newItemDiv);
     // localStorageController update
   };
 
@@ -137,8 +104,6 @@ const coordinator = (() => {
     const tabElement = e.path[0];
     domController.showTabContent(tabName, tabElement);
   };
-
-  /* private functions */
 
   const getItemDivFromEvent = (e) => {
     return e.path.find((element) => element.classList.contains('item'));

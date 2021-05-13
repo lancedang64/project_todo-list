@@ -161,9 +161,7 @@ const domController = (() => {
     toggleCompletedItemDOM(itemDiv);
     moveCompletedItem(itemDiv);
   };
-
-  /* private functions */
-
+  
   const toggleItemContentDisplay = (itemDiv) => {
     const itemBanner = itemDiv.querySelector('.item-banner');
     const itemInfo = itemDiv.querySelector('.item-info');
