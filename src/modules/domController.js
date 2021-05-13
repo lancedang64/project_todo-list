@@ -5,6 +5,29 @@ const domController = (() => {
     itemsArr.forEach((item) => renderNewItem(item));
   };
 
+  const renderNewProject = (name) =>  {
+    renderTabOnSideNav(name);
+    addProjectToSelect(name);
+  };
+
+  const renderTabOnSideNav = (name) => {
+    const sideNav = document.querySelector('.side-nav');
+    const newTab = document.createElement('a');
+    newTab.setAttribute('href', '#');
+    newTab.setAttribute('class', 'tab');
+    newTab.innerHTML = name;
+    sideNav.appendChild(newTab);
+  };
+
+  const addProjectToSelect = (name) => {
+    const template = document.querySelector('#new-item-prompt-template')
+    const select = template.content.querySelector('.item-project--editing');
+    const option = document.createElement('option');
+    option.setAttribute('value', `${name}`);
+    option.innerHTML = name;
+    select.appendChild(option);
+  };
+  
   const showTabContent = (tabName, tabElement) => {
     highlightChosenTab(tabElement);
     changeTabName(tabName);
@@ -213,6 +236,7 @@ const domController = (() => {
     renderItemEditMode,
     renderNewItem,
     renderNewItemPrompt,
+    renderNewProject,
     showHideItemInfo,
     showTabContent,
     toggleItemCompletion,

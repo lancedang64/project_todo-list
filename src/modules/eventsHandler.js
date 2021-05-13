@@ -19,10 +19,6 @@ const eventsHandler = (() => {
     deleteProjectButton.addEventListener('click', coordinator.promptDeleteProject)
   };
 
-  const addListenersNewProjectPrompt = () => {
-    
-  };
-
   const addListenersShowHideItemInfo = (element) => {
     const showInfoButtons = element.querySelectorAll('.show-info');
     showInfoButtons.forEach((button) =>
@@ -63,18 +59,22 @@ const eventsHandler = (() => {
 
   const addListenersTab = (element) => {
     const tabs = element.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.addEventListener('click', coordinator.renderTab));
+    tabs.forEach(tab => addListenerTab(tab));
   };
+
+  const addListenerTab = (tab) => {
+    tab.addEventListener('click', coordinator.renderTab);
+  }
 
   return {
     addListenersInHomePage,
     addListenersNewItemPrompt,
-    addListenersNewProjectPrompt,
     addListenersShowHideItemInfo,
     addListenersItemInfo,
     addListenersItemEdit,
     addListenersCheckbox,
-    addListenersTab
+    addListenersTab,
+    addListenerTab
   };
 })();
 

@@ -2,6 +2,7 @@ import domController from './domController.js';
 import eventsHandler from './eventsHandler.js';
 import dataController from './dataController.js';
 import itemFactory from './item.js';
+import swal from 'sweetalert';
 
 const coordinator = (() => {
   const loadHomePage = () => {
@@ -49,8 +50,14 @@ const coordinator = (() => {
   };
 
   const promptNewProject = (e) => {
-    domController.renderNewProjectPrompt();
-    eventsHandler.addListenersNewProjectPrompt();
+    swal('Please enter your new project name:', {
+      content: 'input',
+    }).then((value) => {
+      if (value === null || value.trim() === '') return;
+      domController.renderNewProject(value);
+      const newTab = document.querySelector('.side-nav').lastChild;
+      eventsHandler.addListenerTab(newTab);
+    });
   };
 
   const promptDeleteProject = (e) => {
@@ -80,16 +87,18 @@ const coordinator = (() => {
   const saveNewItem = (e) => {
     const itemDiv = getItemDivFromEvent(e);
     const item = dataController.getItemFromInput(itemDiv);
-    if (!item) {
-      domController.remindNewItemInput();
-      return;
-    }
+    if (!isItemValid(item)) return;
     dataController.addToAllItems(item);
     domController.removeItemDiv(itemDiv);
     domController.renderNewItem(item);
     const newItemDiv = document.querySelector('.item');
     eventsHandler.addListenersShowHideItemInfo(newItemDiv);
+    // eventsHandler add listener completion too
     // localStorageController update
+  };
+
+  const isItemValid = (item) => {
+    return item ? true : (domController.remindNewItemInput(), false);
   };
 
   const editItem = (e) => {
@@ -134,7 +143,7 @@ const coordinator = (() => {
   const getItemDivFromEvent = (e) => {
     return e.path.find((element) => element.classList.contains('item'));
   };
-  
+
   const getTabDivFromEvent = (e) => {
     return document.querySelector('.tab-panel');
   };

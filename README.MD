@@ -10,6 +10,7 @@ Hi, in this project I built a to do list
 - npm package manager
   - webpack module bundler
     - practices for developement mode and production mode
+  - implementing a package (sweetalert)
 
 - Javascript
   - DOM manipulation
