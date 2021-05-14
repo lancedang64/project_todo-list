@@ -2,8 +2,41 @@ const domController = (() => {
   const contentDiv = document.querySelector('.content');
   const sideNav = document.querySelector('.side-nav');
 
-  const renderExampleItems = (itemsArr) => {
+  const renderItemsFromArray = (itemsArr) => {
     itemsArr.forEach((item) => renderNewItem(item));
+  };
+
+  const renderNewItem = (item) => {
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('item');
+    if (item.isDone === true) itemDiv.classList.add('item--completed');
+    const template = getItemTemplateElements('new-item-template');
+    itemDiv.appendChild(template);
+    updateItemDivWithItem(itemDiv, item);
+    appendElementAfterTabPanel(itemDiv);
+  };
+
+  const getItemTemplateElements = (templateID) => {
+    const itemPromptTemplate = document.querySelector('#' + templateID);
+    let htmlElements = itemPromptTemplate.content.cloneNode(true);
+    return htmlElements;
+  };
+
+  const updateItemDivWithItem = (itemDiv, item) => {
+    const checkbox = itemDiv.querySelector('.checkbox');
+    if (item.isDone === true) checkbox.setAttribute('checked','checked');
+    itemDiv.querySelector('.item-name').innerHTML = item.name;
+    itemDiv.querySelector('.item-due-date').innerHTML = item.dueDate;
+    itemDiv.querySelector('.item-description').innerHTML = item.description;
+    itemDiv.querySelector('.item-project').innerHTML = item.project;
+    itemDiv.querySelector('.item-priority').innerHTML = item.priority;
+  };
+
+  const appendElementAfterTabPanel = (element) => {
+    const firstItem = document.querySelector('.item');
+    firstItem
+      ? contentDiv.insertBefore(element, firstItem)
+      : contentDiv.appendChild(element);
   };
 
   const renderNewProject = (name) => {
@@ -125,22 +158,6 @@ const domController = (() => {
     updateItemDivWithItem(itemDiv, updatedItem);
   };
 
-  const renderNewItem = (item) => {
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'item';
-    itemDiv.appendChild(getItemTemplateElements('new-item-template'));
-    updateItemDivWithItem(itemDiv, item);
-    appendElementAfterTabPanel(itemDiv);
-  };
-
-  const updateItemDivWithItem = (itemDiv, item) => {
-    itemDiv.querySelector('.item-name').innerHTML = item.name;
-    itemDiv.querySelector('.item-due-date').innerHTML = item.dueDate;
-    itemDiv.querySelector('.item-description').innerHTML = item.description;
-    itemDiv.querySelector('.item-project').innerHTML = item.project;
-    itemDiv.querySelector('.item-priority').innerHTML = item.priority;
-  };
-
   const showHideItemInfo = (itemDiv) => {
     const info = itemDiv.querySelector('.item-info');
     info.classList.contains('item-info--expanded')
@@ -173,20 +190,27 @@ const domController = (() => {
     appendElementAfterTabPanel(itemDiv);
   };
 
-  const appendElementAfterTabPanel = (element) => {
-    const firstItem = document.querySelector('.item');
-    firstItem
-      ? contentDiv.insertBefore(element, firstItem)
-      : contentDiv.appendChild(element);
-  };
-
   const removeItemDiv = (itemDiv) => {
     itemDiv.remove();
   };
 
   const toggleItemCompletion = (itemDiv) => {
-    toggleCompletedItemDOM(itemDiv);
     moveCompletedItem(itemDiv);
+    toggleCompletedItemDOM(itemDiv);
+  };
+
+  const toggleCompletedItemDOM = (itemDiv) => {
+    const checkbox = itemDiv.querySelector('.checkbox');
+    checkbox.checked
+      ? itemDiv.classList.add('item--completed')
+      : itemDiv.classList.remove('item--completed');
+  };
+
+  const moveCompletedItem = (itemDiv) => {
+    const topCompletedItem = document.querySelector('.item--completed');
+    topCompletedItem
+      ? contentDiv.insertBefore(itemDiv, topCompletedItem)
+      : contentDiv.appendChild(itemDiv);
   };
 
   const toggleItemContentDisplay = (itemDiv) => {
@@ -200,12 +224,6 @@ const domController = (() => {
     div.classList.contains('hidden')
       ? div.classList.remove('hidden')
       : div.classList.add('hidden');
-  };
-
-  const getItemTemplateElements = (templateID) => {
-    const itemPromptTemplate = document.querySelector('#' + templateID);
-    let htmlElements = itemPromptTemplate.content.cloneNode(true);
-    return htmlElements;
   };
 
   const getReversedFormattedDate = (dueDate) => {
@@ -232,28 +250,13 @@ const domController = (() => {
     }
   };
 
-  const toggleCompletedItemDOM = (itemDiv) => {
-    const checkbox = itemDiv.querySelector('.checkbox');
-    checkbox.checked
-      ? itemDiv.classList.add('item--completed')
-      : itemDiv.classList.remove('item--completed');
-  };
-
-  const moveCompletedItem = (itemDiv) => {
-    contentDiv.removeChild(itemDiv);
-    const topCompletedItem = document.querySelector('.item--completed');
-    topCompletedItem
-      ? contentDiv.insertBefore(itemDiv, topCompletedItem)
-      : contentDiv.appendChild(itemDiv);
-  };
-
   return {
     discardItemEditMode,
     remindNewItemInput,
     remindNewItemPrompt,
     removeItemDiv,
     deleteProject,
-    renderExampleItems,
+    renderItemsFromArray,
     renderItemEditMode,
     renderNewItem,
     renderNewItemPrompt,

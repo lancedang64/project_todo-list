@@ -3,18 +3,35 @@ import eventsHandler from './eventsHandler';
 import dataController from './dataController';
 import swal from 'sweetalert';
 import examples from './examples';
+import localStorageController from './localStorageController';
 
 const coordinator = (() => {
   const loadHomePage = () => {
-    // if there is localStorage then load contentDiv All items innerHTML
+    localStorage.getItem('allItems')
+      ? loadHomePageWithLocalStorage()
+      : loadHomePageWithExamples();
+    eventsHandler.addListenersInHomePage();
+  };
+
+  const loadHomePageWithLocalStorage = () => {
+    const allItems = localStorageController.getItems();
+    dataController.setStoredItems(allItems);
+    domController.renderItemsFromArray(allItems);
+  };
+
+  const loadHomePageWithExamples = () => {
     importAndAddExamples();
     const allItems = dataController.getItemsFromTab('All items');
-    domController.renderExampleItems(allItems);
-    eventsHandler.addListenersInHomePage();
+    domController.renderItemsFromArray(allItems);
   };
 
   const importAndAddExamples = () => {
     examples.forEach((item) => dataController.addToAllItems(item));
+  };
+
+  const updateLocalStorage = () => {
+    const itemsArray = dataController.getItemsFromTab('All items');
+    localStorageController.update(itemsArray);
   };
 
   const promptNewProject = (e) => {
@@ -54,6 +71,7 @@ const coordinator = (() => {
     const tabName = projectTab.querySelector('.tab-name').innerHTML;
     if (tabName === 'All items') return alertCannotDelete();
     domController.deleteProject(tabName);
+    updateLocalStorage();
   };
 
   const alertCannotDelete = () => {
@@ -90,7 +108,7 @@ const coordinator = (() => {
     domController.renderNewItem(item);
     const newItemDiv = document.querySelector('.item');
     eventsHandler.addListenersNewItemDiv(newItemDiv);
-    // localStorageController update
+    updateLocalStorage();
   };
 
   const editItem = (e) => {
@@ -110,18 +128,21 @@ const coordinator = (() => {
     const updatedItem = dataController.updateAndGetItemFromDiv(itemDiv);
     if (!updatedItem) domController.remindNewItemInput();
     domController.updateItemFromDiv(itemDiv, updatedItem);
+    updateLocalStorage();
   };
 
   const deleteItem = (e) => {
     const itemDiv = getItemDivFromEvent(e);
     dataController.deleteItem(itemDiv);
     domController.removeItemDiv(itemDiv);
+    updateLocalStorage();
   };
 
   const toggleItemCompletion = (e) => {
     const itemDiv = getItemDivFromEvent(e);
     dataController.toggleItemCompletion(itemDiv);
     domController.toggleItemCompletion(itemDiv);
+    updateLocalStorage();
   };
 
   const renderTab = (e) => {

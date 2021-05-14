@@ -1,21 +1,27 @@
 import itemFactory from './item';
 
 const dataController = (() => {
-  const allItems = [];
+  let allItems = [];
+
+  const setStoredItems = (itemsArray) => {
+    allItems = itemsArray;
+  };
 
   const getItemsFromTab = (tabName) => {
     if (tabName === 'All items') return allItems;
-    return allItems.filter(item => item.project === tabName);
+    return allItems.filter((item) => item.project === tabName);
   };
 
   const getItemFromInput = (itemDiv) => {
     const name = itemDiv.querySelector('.item-name--editing').value;
     const dueDate = itemDiv.querySelector('.item-due-date--editing').value;
-    const description = itemDiv.querySelector('.item-description--editing')
-      .value;
+    const description = itemDiv.querySelector(
+      '.item-description--editing'
+    ).value;
     const project = itemDiv.querySelector('.item-project--editing').value;
-    const priority = itemDiv.querySelector('input[name=priority]:checked')
-      .value;
+    const priority = itemDiv.querySelector(
+      'input[name=priority]:checked'
+    ).value;
 
     if (name.trim() === '' || dueDate === '') return undefined;
 
@@ -50,7 +56,14 @@ const dataController = (() => {
 
   const toggleItemCompletion = (itemDiv) => {
     const item = getItemFromDiv(itemDiv);
-    item.isDone === false ? item.isDone = true : item.isDone = false;
+    item.isDone === false ? (item.isDone = true) : (item.isDone = false);
+    moveItemInArray(item);
+  };
+
+  const moveItemInArray = (item) => {
+    const itemIndex = allItems.indexOf(item);
+    allItems.splice(itemIndex, 1);
+    item.isDone === true ? allItems.unshift(item) : allItems.push(item);
   };
 
   const getItemFromDiv = (itemDiv) => {
@@ -59,13 +72,14 @@ const dataController = (() => {
   };
 
   return {
+    setStoredItems,
     getItemsFromTab,
     getItemFromInput,
     addToAllItems,
     deleteItem,
     getItemFromDiv,
     updateAndGetItemFromDiv,
-    toggleItemCompletion
+    toggleItemCompletion,
   };
 })();
 
