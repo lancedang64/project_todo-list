@@ -2,9 +2,24 @@ import itemFactory from './item';
 
 const dataController = (() => {
   let allItems = [];
+  let allProjects = ['Coding', 'Life', 'Other'];
 
-  const setStoredItems = (itemsArray) => {
-    allItems = itemsArray;
+  const getProjects = () => {
+    return allProjects;
+  };
+
+  const addProject = (name) => {
+    allProjects.push(name);
+  };
+
+  const removeProject = (name) => {
+    const projectIndex = allProjects.indexOf(name);
+    allProjects.splice(projectIndex, 1);
+  };
+
+  const setStoredData = (items, projects) => {
+    allItems = items;
+    allProjects = projects;
   };
 
   const getItemsFromTab = (tabName) => {
@@ -72,7 +87,10 @@ const dataController = (() => {
   };
 
   return {
-    setStoredItems,
+    addProject,
+    removeProject,
+    getProjects,
+    setStoredData,
     getItemsFromTab,
     getItemFromInput,
     addToAllItems,

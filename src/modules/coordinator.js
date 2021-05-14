@@ -7,21 +7,25 @@ import localStorageController from './localStorageController';
 
 const coordinator = (() => {
   const loadHomePage = () => {
-    localStorage.getItem('allItems')
+    localStorage.getItem('items')
       ? loadHomePageWithLocalStorage()
       : loadHomePageWithExamples();
     eventsHandler.addListenersInHomePage();
   };
 
   const loadHomePageWithLocalStorage = () => {
-    const allItems = localStorageController.getItems();
-    dataController.setStoredItems(allItems);
-    domController.renderItemsFromArray(allItems);
+    const items = localStorageController.getData('items');
+    const projects = localStorageController.getData('projects');
+    dataController.setStoredData(items, projects);
+    domController.renderItemsFromArray(items);
+    domController.renderProjectsFromArray(projects);
   };
 
   const loadHomePageWithExamples = () => {
     importAndAddExamples();
     const allItems = dataController.getItemsFromTab('All items');
+    const projects = dataController.getProjects();
+    domController.renderProjectsFromArray(projects);
     domController.renderItemsFromArray(allItems);
   };
 
@@ -30,8 +34,10 @@ const coordinator = (() => {
   };
 
   const updateLocalStorage = () => {
-    const itemsArray = dataController.getItemsFromTab('All items');
-    localStorageController.update(itemsArray);
+    const items = dataController.getItemsFromTab('All items');
+    const projects = dataController.getProjects();
+    localStorageController.updateData('items', items);
+    localStorageController.updateData('projects', projects);
   };
 
   const promptNewProject = (e) => {
@@ -40,6 +46,7 @@ const coordinator = (() => {
     }).then((value) => {
       if (value === null || value.trim() === '') return alertInvalidName();
       domController.renderNewProject(value);
+      dataController.addProject(value);
       const newTab = document.querySelector('.side-nav').lastChild;
       eventsHandler.addListenerTab(newTab);
     });
@@ -70,7 +77,8 @@ const coordinator = (() => {
     const projectTab = getTabDivFromEvent(e);
     const tabName = projectTab.querySelector('.tab-name').innerHTML;
     if (tabName === 'All items') return alertCannotDelete();
-    domController.deleteProject(tabName);
+    domController.removeProject(tabName);
+    dataController.removeProject(tabName);
     updateLocalStorage();
   };
 

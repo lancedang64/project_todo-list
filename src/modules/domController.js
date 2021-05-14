@@ -39,6 +39,10 @@ const domController = (() => {
       : contentDiv.appendChild(element);
   };
 
+  const renderProjectsFromArray = (projects) => {
+    projects.forEach((project) => renderNewProject(project));
+  };
+
   const renderNewProject = (name) => {
     renderTabOnSideNav(name);
     addProjectToSelect(name);
@@ -92,7 +96,7 @@ const domController = (() => {
     tabNameSpan.innerHTML = tabName;
   };
 
-  const deleteProject = (tabName) => {
+  const removeProject = (tabName) => {
     removeProjectOnSideBar(tabName);
     removeProjectOnNewItemPrompt(tabName);
   };
@@ -255,8 +259,9 @@ const domController = (() => {
     remindNewItemInput,
     remindNewItemPrompt,
     removeItemDiv,
-    deleteProject,
+    removeProject,
     renderItemsFromArray,
+    renderProjectsFromArray,
     renderItemEditMode,
     renderNewItem,
     renderNewItemPrompt,

@@ -1,16 +1,15 @@
 const localStorageController = (() => {
-  const update = (itemsArray) => {
-    const allItems = JSON.stringify(itemsArray);
-    localStorage.setItem('allItems', allItems);
+  const updateData = (name, array) => {
+    const data = JSON.stringify(array);
+    localStorage.setItem(name, data);
   };
 
-  const getItems = () => {
-    const allItems = localStorage.getItem('allItems');
-    const itemsArray = JSON.parse(allItems);
-    return itemsArray;
+  const getData = (name) => {
+    const data = localStorage.getItem(name);
+    return JSON.parse(data);  
   };
 
-  return { update, getItems }
+  return { updateData, getData }
 })();
 
-export default localStorageController
+export default localStorageController;
