@@ -126,7 +126,7 @@ header h1 {
   border: solid 1px black;
   padding: 0.5em;
   display: grid;
-  grid-template-columns: 0.5fr 4fr 1.7fr 0.5fr;
+  grid-template-columns: 0.5fr 4fr 0.2fr 1.5fr 0.5fr;
   align-items: center;
   gap: 2%;
 }
@@ -233,6 +233,7 @@ input[type='radio']:checked + label {
 
 .item--completed {
   text-decoration: line-through;
+  color: #23ce6b;
 }
 
 .hidden {

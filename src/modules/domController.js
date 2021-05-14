@@ -30,6 +30,7 @@ const domController = (() => {
     itemDiv.querySelector('.item-description').innerHTML = item.description;
     itemDiv.querySelector('.item-project').innerHTML = item.project;
     itemDiv.querySelector('.item-priority').innerHTML = item.priority;
+    itemDiv.querySelector('.item-priority-2').innerHTML = item.priority;
   };
 
   const appendElementAfterTabPanel = (element) => {
