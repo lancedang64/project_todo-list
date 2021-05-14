@@ -1,4 +1,4 @@
-import coordinator from './coordinator.js';
+import coordinator from './coordinator';
 
 const eventsHandler = (() => {
   const addListenersInHomePage = () => {

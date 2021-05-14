@@ -1,4 +1,4 @@
-import itemFactory from './item.js';
+import itemFactory from './item';
 
 const dataController = (() => {
   const allItems = [];

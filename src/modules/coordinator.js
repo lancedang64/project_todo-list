@@ -1,8 +1,8 @@
-import domController from './domController.js';
-import eventsHandler from './eventsHandler.js';
-import dataController from './dataController.js';
+import domController from './domController';
+import eventsHandler from './eventsHandler';
+import dataController from './dataController';
 import swal from 'sweetalert';
-import examples from './examples.js';
+import examples from './examples';
 
 const coordinator = (() => {
   const loadHomePage = () => {

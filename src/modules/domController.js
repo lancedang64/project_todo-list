@@ -37,8 +37,7 @@ const domController = (() => {
   const hideNotTabItems = (tabName) => {
     const allItemDivs = document.querySelectorAll('.item');
     if (tabName === 'All items') {
-      allItemDivs.forEach((itemDiv) => showItemDiv(itemDiv));
-      return;
+      return allItemDivs.forEach((itemDiv) => showItemDiv(itemDiv));
     }
     const tabItemDivs = getItemDivsFromTabName(tabName);
     allItemDivs.forEach((itemDiv) => hideItemDiv(itemDiv));
@@ -101,15 +100,18 @@ const domController = (() => {
 
   const renderItemEditMode = (itemDiv, item) => {
     toggleItemContentDisplay(itemDiv);
+    fillItemEditModeWithItem(itemDiv, item);
+    assignCurrentItemProjectValue(itemDiv, item.project);
+    assignCurrentItemPriorityValue(itemDiv, item.priority);
+  };
 
+  const fillItemEditModeWithItem = (itemDiv, item) => {
     const formattedDate = getReversedFormattedDate(item.dueDate);
     itemDiv.appendChild(getItemTemplateElements('new-item-prompt-template'));
     itemDiv.querySelector('.item-name--editing').value = item.name;
     itemDiv.querySelector('.item-due-date--editing').value = formattedDate;
     itemDiv.querySelector('.item-description--editing').value =
       item.description;
-    assignCurrentItemProjectValue(itemDiv, item.project);
-    assignCurrentItemPriorityValue(itemDiv, item.priority);
   };
 
   const discardItemEditMode = (itemDiv) => {
@@ -165,8 +167,9 @@ const domController = (() => {
 
   const renderNewItemPrompt = () => {
     const itemDiv = document.createElement('div');
+    const itemPromptNodes = getItemTemplateElements('new-item-prompt-template');
+    itemDiv.appendChild(itemPromptNodes);
     itemDiv.className = 'item';
-    itemDiv.appendChild(getItemTemplateElements('new-item-prompt-template'));
     appendElementAfterTabPanel(itemDiv);
   };
 
@@ -189,12 +192,14 @@ const domController = (() => {
   const toggleItemContentDisplay = (itemDiv) => {
     const itemBanner = itemDiv.querySelector('.item-banner');
     const itemInfo = itemDiv.querySelector('.item-info');
-    itemBanner.classList.contains('hidden')
-      ? itemBanner.classList.remove('hidden')
-      : itemBanner.classList.add('hidden');
-    itemInfo.classList.contains('hidden')
-      ? itemInfo.classList.remove('hidden')
-      : itemInfo.classList.add('hidden');
+    toggleHiddenClassFor(itemBanner);
+    toggleHiddenClassFor(itemInfo);
+  };
+
+  const toggleHiddenClassFor = (div) => {
+    div.classList.contains('hidden')
+      ? div.classList.remove('hidden')
+      : div.classList.add('hidden');
   };
 
   const getItemTemplateElements = (templateID) => {
@@ -228,22 +233,15 @@ const domController = (() => {
   };
 
   const toggleCompletedItemDOM = (itemDiv) => {
-    const itemName = itemDiv.querySelector('.item-name');
-    const dueDate = itemDiv.querySelector('.item-due-date');
     const checkbox = itemDiv.querySelector('.checkbox');
     checkbox.checked
-      ? ((itemName.style.textDecoration = 'line-through'),
-        (dueDate.style.textDecoration = 'line-through'),
-        itemDiv.classList.add('item--completed'))
-      : ((itemName.style.textDecoration = 'none'),
-        (dueDate.style.textDecoration = 'none'),
-        itemDiv.classList.remove('item--completed'));
+      ? itemDiv.classList.add('item--completed')
+      : itemDiv.classList.remove('item--completed');
   };
 
   const moveCompletedItem = (itemDiv) => {
     contentDiv.removeChild(itemDiv);
     const topCompletedItem = document.querySelector('.item--completed');
-
     topCompletedItem
       ? contentDiv.insertBefore(itemDiv, topCompletedItem)
       : contentDiv.appendChild(itemDiv);

@@ -239,6 +239,10 @@ input[type='radio']:checked + label {
   padding: 0.5em 1em;
 }
 
+.item--completed {
+  text-decoration: line-through;
+}
+
 .hidden {
   display: none;
 }
