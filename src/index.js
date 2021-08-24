@@ -1,5 +1,5 @@
 // for dev import
-// import './style.css';
+import './app.css';
 import coordinator from './modules/coordinator';
 
 coordinator.loadHomePage();
