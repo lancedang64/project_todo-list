@@ -133,6 +133,10 @@ header h1 {
 	align-items: center;
 }
 
+/*============================
+  Checkbox
+==============================*/
+
 .checkbox-container {
 	display: block;
 	cursor: pointer;
@@ -178,6 +182,10 @@ header h1 {
 	transform: rotate(45deg);
 }
 
+/*============================
+  Action buttons
+==============================*/
+
 .action {
 	height: 3em;
 	padding: 0 1em;
@@ -186,6 +194,7 @@ header h1 {
 .item-banner--editing,
 .item-info--editing {
 	transition: 0.5s;
+	grid-template-columns: 0.5fr 4fr 1.5fr 2fr 1fr;
 }
 
 .item-banner--editing input,
@@ -194,7 +203,9 @@ header h1 {
 	font-size: 1em;
 }
 
-/*item-info--editing elements*/
+/*============================
+  item-info--editing elements
+==============================*/
 
 input[type='radio'] {
 	display: none;
@@ -212,6 +223,9 @@ input[type='radio']:checked + label {
 }
 
 .item-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	background-color: white;
 	font-size: 1em;
 	border-bottom: solid 1px black;
@@ -227,10 +241,8 @@ input[type='radio']:checked + label {
 	animation: fade-in 0.8s;
 }
 
-.item-info button {
-	font-size: 1em;
-	margin: 0.5em 1em 1em 0;
-	padding: 0.5em 1em;
+.item-project--editing {
+	width: 60%;
 }
 
 .item--completed {
