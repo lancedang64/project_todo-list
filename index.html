@@ -26,37 +26,36 @@
       </div>
     </section>
     </div>
-    
-    <template id="new-item-prompt-template">
+
+    <template id="new-item-template-prompt">
       <div class="item-banner item-banner--editing">
         <label class='checkbox-container'>
           <input type="checkbox" disabled="disabled"/>
           <span class="custom-checkbox"></span>
         </label>
         <input type="text" placeholder="Task name" class="item-name item-name--editing"></input>
-        <span></span>
+        <label>Project: 
+          <select name="projects" class="item-project item-project--editing">
+          </select>
+        </label>
+        <span>Priority: 
+            <input type="radio" id="priority1" name="priority" value="!" checked="yes">
+            <label for="priority1" class='priority-label'>!</label>
+            <input type="radio" id="priority2" name="priority" value="!!">
+            <label for="priority2" class='priority-label'>!!</label>
+            <input type="radio" id="priority3" name="priority" value="!!!">
+            <label for="priority3" class='priority-label'>!!!</label>
+        </span>
         <input type="date" class="item-due-date item-due-date--editing"></input>
       </div>
-      <div class="item-info item-info--editing item-info--expanded">
-        <label>Description: </label>
-        <input type="text" class="item-description item-description--editing">
-        <label>Project: </label>
-        <select name="projects" class="item-project item-project--editing">
-        </select>
-        <span>Priority: </span>
-        <div>
-          <input type="radio" id="priority1" name="priority" value="!" checked="yes">
-          <label for="priority1" class='priority-label'>!</label>
-          <input type="radio" id="priority2" name="priority" value="!!">
-          <label for="priority2" class='priority-label'>!!</label>
-          <input type="radio" id="priority3" name="priority" value="!!!">
-          <label for="priority3" class='priority-label'>!!!</label>
-        </div>
-        <br>
-        <div>
-          <button class="discard">Discard</button>
-          <button class="save">Save</button>
-        </div>
+      <div class="item-info item-info--editing">
+        <label>Description: 
+          <input type="text" class="item-description item-description--editing">
+        </label>
+        <span>
+          <button class="action discard">Discard</button>
+          <button class="action save">Save</button>
+        </span>
       </div>
     </template>
 
