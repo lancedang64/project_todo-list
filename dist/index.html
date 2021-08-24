@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>To-do list</title>
     <link rel="shortcut icon" href="#" />
-    <link rel="stylesheet" href="app.css">
     <!-- comment out for dev -->
   </head>
   <body>
@@ -12,18 +11,20 @@
       <h1>Lance To-do list App</h1>
       <a href="https://github.com/lancedang64/project_todo-list" class="github-logo"></a>
     </header>
-    <div class="side-nav">
-      <a href="#" id="all-items" class="tab tab--selected">All items</a>
-      <span>Projects</span>
-    </div>
-    <div id="content" class="content">
-      <div class="tab-panel">
-        <span class="tab-name">All items</span>
-        <button class='add-new-item'>Add new item</button>
-        <button class="add-new-project">Add new project</button>
-        <button class="delete-project">Delete project</button>
+    <section class="section-container">
+      <div class="side-nav">
+        <a href="#" id="all-items" class="tab tab--selected">All items</a>
+        <span>Projects</span>
       </div>
-    </div>
+      <div id="content" class="content">
+        <div class="tab-panel">
+          <span class="tab-name">All items</span>
+          <button class='add-new-item'>Add new item</button>
+          <button class="add-new-project">Add new project</button>
+          <button class="delete-project">Delete project</button>
+        </div>
+      </div>
+    </section>
     </div>
     
     <template id="new-item-prompt-template">
@@ -58,6 +59,7 @@
         </div>
       </div>
     </template>
+
     <template id="new-item-template">
       <div class="item-banner">
         <label class='checkbox-container'>
@@ -65,22 +67,16 @@
           <span class="custom-checkbox"></span>
         </label>
         <span class='item-name'></span>
-        <span class='item-priority-2'></span>
+        <span class="item-project"></span>
+        <span class='item-priority'></span>
         <span class='item-due-date'></span>
-        <button class="show-info">...</button>
+        <span>
+          <button class="action edit">Edit</button>
+          <button class="action delete">Delete</button>      
+        </span>
       </div>
       <div class="item-info">
-        <label>Description: </label>
         <span class="item-description"></span>
-        <span>Project: </span>
-        <span class="item-project"></span>
-        <label>Priority: </label>
-        <span class="item-priority"></span>
-        <br>
-        <div>
-          <button class="edit">Edit</button>
-          <button class="delete">Delete</button>
-        </div>
       </div>
     </template>
     <script src="bundle.js"></script>
