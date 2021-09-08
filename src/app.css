@@ -107,9 +107,9 @@ header h1 {
 	border-right: solid 1px rgb(49, 49, 49);
 	margin-bottom: 1em;
 	font-size: 2em;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	place-items: center;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .add-new-item,
@@ -121,9 +121,7 @@ header h1 {
 	background-color: #e79988;
 }
 
-.add-new-item,
-.add-new-project,
-.delete-project {
+.operation-button {
 	font-size: 0.5em;
 	padding: 1em;
 }
