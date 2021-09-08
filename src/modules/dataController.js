@@ -85,7 +85,7 @@ const dataController = (() => {
 	const moveItemInArray = item => {
 		const itemIndex = allItems.indexOf(item);
 		allItems.splice(itemIndex, 1);
-		item.isDone ? allItems.push(item) : allItems.unshift(item);
+		item.isDone ? allItems.unshift(item) : allItems.push(item);
 	};
 
 	const getItemFromDiv = itemDiv => {
