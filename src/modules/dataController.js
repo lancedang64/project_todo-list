@@ -72,15 +72,20 @@ const dataController = (() => {
 	};
 
 	const toggleItemCompletion = itemDiv => {
-		const item = getItemFromDiv(itemDiv);
-		item.isDone === false ? (item.isDone = true) : (item.isDone = false);
-		moveItemInArray(item);
+		const chosenItem = getItemFromDiv(itemDiv);
+		chosenItem.isDone = chosenItem.isDone ? false : true;
+		allItems = allItems.map(item => {
+			if (item.name === chosenItem.name) return chosenItem;
+			else return item;
+		});
+		moveItemInArray(chosenItem);
+		console.log(allItems);
 	};
 
 	const moveItemInArray = item => {
 		const itemIndex = allItems.indexOf(item);
 		allItems.splice(itemIndex, 1);
-		item.isDone === true ? allItems.unshift(item) : allItems.push(item);
+		item.isDone ? allItems.push(item) : allItems.unshift(item);
 	};
 
 	const getItemFromDiv = itemDiv => {
